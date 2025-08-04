@@ -19,13 +19,8 @@ jobs:
       - name: 🔐 Login to GitHub Container Registry (GHCR)
         run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: 🐳 Build and Push using Docker Compose
+      
+      - name: 🐳 Build and Push using Docker Compose v2
         run: |
-          docker compose version || {
-            echo "⚠️ Docker Compose not found. Installing...";
-            sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose
-          }
-          docker-compose build
-          docker-compose push
-
+          docker compose build
+          docker compose push
