@@ -39,7 +39,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/activepieces/activepieces:testing-pre-prod
+          tags: ghcr.io/universalcommerceinc/activepieces:testing-pre-prod
 
       - name: Configure SSH
         run: |

@@ -47,5 +47,5 @@ jobs:
             linux/arm64
           push: true
           tags: |
-            ghcr.io/activepieces/activepieces:${{ env.RELEASE }}
+            ghcr.io/universalcommerceinc/activepieces:${{ env.RELEASE }}
             ghcr.io/activepieces/activepieces-cloud:${{ env.CLOUD_RELEASE }}
