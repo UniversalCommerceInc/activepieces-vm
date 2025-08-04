@@ -1,4 +1,4 @@
-- name: Crowdin Action
+  name: Crowdin Action
   uses: crowdin/github-action@v2
   with:
     config: './crowdin.yml'  # Make sure it's pointing to root-level file
