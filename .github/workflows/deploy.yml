@@ -1,0 +1,22 @@
+name: CI/CD Activepieces
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Stop Old Containers
+        run: docker-compose -f docker-compose.yml down -v
+
+      - name: Build and Start New Containers
+        run: docker-compose -f docker-compose.yml up -d --build
+
+      - name: Check Status
+        run: docker ps
+
