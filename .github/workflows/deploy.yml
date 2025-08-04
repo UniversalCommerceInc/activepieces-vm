@@ -22,10 +22,10 @@ jobs:
       - name: 📝 Create temporary .env file from GitHub Secrets
         run: |
           cat <<EOF > .env
-AP_POSTGRES_DATABASE=${{ secrets.AP_POSTGRES_DATABASE }}
-AP_POSTGRES_USERNAME=${{ secrets.AP_POSTGRES_USERNAME }}
-AP_POSTGRES_PASSWORD=${{ secrets.AP_POSTGRES_PASSWORD }}
-EOF
+          AP_POSTGRES_DATABASE=${{ secrets.AP_POSTGRES_DATABASE }}
+          AP_POSTGRES_USERNAME=${{ secrets.AP_POSTGRES_USERNAME }}
+          AP_POSTGRES_PASSWORD=${{ secrets.AP_POSTGRES_PASSWORD }}
+          EOF
 
       - name: 🐳 Build and Push using Docker Compose v2
         run: |
