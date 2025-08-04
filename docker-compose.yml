@@ -1,6 +1,10 @@
 version: '3.0'
 services:
   activepieces:
+    build:
+      context: .
+      dockerfile: Dockerfile
+          
     image: ghcr.io/universalcommerceinc/activepieces:testing-ee
     container_name: activepieces
     restart: unless-stopped
