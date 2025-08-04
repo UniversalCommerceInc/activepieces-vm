@@ -1,4 +1,4 @@
-name: Docker Build and Push to GHCR
+name: Build and Push to GHCR
 
 on:
   push:
@@ -16,11 +16,16 @@ jobs:
       - name: 🛠 Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: 🔐 Log in to GitHub Container Registry
-        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u UniversalCommerceInc --password-stdin
+      - name: 🔐 Login to GitHub Container Registry (GHCR)
+        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: 🐳 Build and push Docker image
+      - name: 🐳 Build and Push using Docker Compose
         run: |
-          docker build -t ghcr.io/universalcommerceinc/activepieces:testing-ee .
-          docker push ghcr.io/universalcommerceinc/activepieces:testing-ee
+          docker compose version || {
+            echo "⚠️ Docker Compose not found. Installing...";
+            sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+          }
+          docker-compose build
+          docker-compose push
 
