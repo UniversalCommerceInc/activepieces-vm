@@ -1,0 +1,15 @@
+  {
+    "commit_sha": "2a7aec318b306afff132b7f25abe5201542d782d",
+    "deployed_by": "yogi2023-cne",
+    "deployment_time": "2025-08-05T08:57:25+00:00",
+    "image_tag": "ghcr.io/universalcommerceinc/activepieces:main-2a7aec3-20250805-084727
+ghcr.io/universalcommerceinc/activepieces:testing-ee
+ghcr.io/universalcommerceinc/activepieces:latest",
+    "workflow_run": "16745222031"
+  }
+  EOF
+  
+  # Run deployment
+  ./deploy.sh 2>&1 | tee "deployment-20250805-085725.log"
+  
+  echo "✅ Deployment completed successfully"
