@@ -1,14 +1,14 @@
 name: Build and Push to GHCR
+
 on:
   push:
     branches:
       - main
   workflow_dispatch:
 
-# Prevent concurrent deployments
 concurrency:
   group: deploy-${{ github.ref }}
-  cancel-in-progress: false  # Don't cancel, queue instead
+  cancel-in-progress: false
 
 env:
   REGISTRY: ghcr.io
@@ -23,32 +23,30 @@ jobs:
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
-        
+
       - name: 🛠 Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-        
+
       - name: 🔐 Login to GitHub Container Registry (GHCR)
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
-          
+
       - name: 📋 Generate unique tags
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            # Unique tags for each commit
             type=sha,prefix={{branch}}-,suffix=-{{date 'YYYYMMDD-HHmmss'}}
             type=ref,event=branch,suffix=-{{sha}}-{{date 'YYYYMMDD-HHmmss'}}
-            # Keep testing-ee as latest for convenience
             type=raw,value=testing-ee
             type=raw,value=latest
           flavor: |
             latest=auto
-            
+
       - name: 🐳 Build and Push with unique tags
         id: build
         uses: docker/build-push-action@v5
@@ -59,18 +57,13 @@ jobs:
           platforms: linux/amd64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: |
-            type=gha
-            type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-          cache-to: |
-            type=gha,mode=max
-            type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy-to-server:
     needs: build-and-push
     runs-on: Linux
     environment: production
-    # Additional concurrency control for deployment
     concurrency:
       group: deploy-production
       cancel-in-progress: false
@@ -81,42 +74,33 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-          
+
       - name: 🔒 Acquire deployment lock
         timeout-minutes: 10
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
-            # Create lock file to prevent concurrent deployments
             LOCK_FILE="/tmp/deployment.lock"
-            
-            # Wait for any existing deployment to finish
             while [ -f "$LOCK_FILE" ]; do
               echo "⏳ Another deployment is in progress, waiting..."
               sleep 10
             done
-            
-            # Acquire lock
             echo "🔒 Acquiring deployment lock"
             echo "$$" > "$LOCK_FILE"
             echo "Deployment started by: ${{ github.actor }}"
             echo "Commit SHA: ${{ github.sha }}"
             echo "Timestamp: $(date)"
           ENDSSH
-          
+
       - name: 🚀 Deploy with lock protection
         timeout-minutes: 15
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
             set -euo pipefail
-            
             cd ~/activepieces-vm
-            
             echo "🚀 Starting deployment"
             echo "Commit: ${{ github.sha }}"
             echo "Author: ${{ github.actor }}"
             echo "Time: $(date)"
-            
-            # Store deployment info
             cat > deployment-info.json << EOF
             {
               "commit_sha": "${{ github.sha }}",
@@ -126,25 +110,21 @@ jobs:
               "workflow_run": "${{ github.run_id }}"
             }
             EOF
-            
-            # Run deployment
             ./deploy.sh 2>&1 | tee "deployment-$(date +%Y%m%d-%H%M%S).log"
-            
             echo "✅ Deployment completed successfully"
           ENDSSH
-          
+
       - name: 🔓 Release deployment lock
         if: always()
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
-            # Always remove lock, even if deployment failed
             LOCK_FILE="/tmp/deployment.lock"
             if [ -f "$LOCK_FILE" ]; then
               echo "🔓 Releasing deployment lock"
               rm -f "$LOCK_FILE"
             fi
           ENDSSH
-          
+
       - name: 📊 Deployment Summary
         if: success()
         run: |
