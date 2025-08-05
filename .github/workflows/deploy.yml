@@ -58,6 +58,6 @@ jobs:
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: 🚀 Run deploy.sh on server
-        run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-          "GHCR_PAT='${{ secrets.GHCR_PAT }}' bash -s" < ./deploy.sh
+        env:
+          GHCR_PAT: ${{ secrets.GHCR_PAT }}
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ~/activepieces-vm && GHCR_PAT=${{ secrets.GHCR_PAT }} ./deploy.sh"
