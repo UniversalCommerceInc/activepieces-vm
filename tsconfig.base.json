@@ -693,6 +693,9 @@
       "@activepieces/piece-placid": [
         "packages/pieces/community/placid/src/index.ts"
       ],
+      "@activepieces/piece-podio": [
+        "packages/pieces/community/podio/src/index.ts"
+      ],
       "@activepieces/piece-poper": [
         "packages/pieces/community/poper/src/index.ts"
       ],
@@ -843,6 +846,9 @@
       ],
       "@activepieces/piece-soap": [
         "packages/pieces/community/soap/src/index.ts"
+      ],
+      "@activepieces/piece-softr": [
+        "packages/pieces/community/softr/src/index.ts"
       ],
       "@activepieces/piece-sperse": [
         "packages/pieces/community/sperse/src/index.ts"
