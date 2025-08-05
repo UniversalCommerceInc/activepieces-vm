@@ -68,7 +68,7 @@ jobs:
 
   deploy-to-server:
     needs: build-and-push
-    runs-on: ubuntu-latest
+    runs-on: Linux
     environment: production
     # Additional concurrency control for deployment
     concurrency:
