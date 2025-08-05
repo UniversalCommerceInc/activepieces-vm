@@ -1,8 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
+# ==== Configuration ====
+REGISTRY="ghcr.io"
+IMAGE="ghcr.io/universalcommerceinc/activepieces:testing-ee"
+GITHUB_USER="yogi2023-cne"
+
 echo "🔐 Logging in to GHCR..."
-echo "${GHCR_PAT}"  | docker login ghcr.io -u yogi2023-cne --password-stdin 
+echo "${GHCR_PAT}" | docker login ${REGISTRY} -u ${GITHUB_USER} --password-stdin
 
 echo "📦 Pulling latest image from GHCR..."
 docker compose pull
@@ -15,6 +20,9 @@ docker compose up -d --force-recreate
 
 echo "✅ Deployment complete."
 
-echo "📦 Currently running image:"
-docker inspect --format='{{.Config.Image}}' $(docker ps -q --filter "name=activepieces")
+echo "🔍 Verifying running image:"
+docker ps --filter "name=activepieces" --format "Container: {{.Names}} | Image: {{.Image}} | Status: {{.Status}}"
+
+echo "📦 Latest pulled image:"
+docker images "${IMAGE}" --format "Image: {{.Repository}}:{{.Tag}} | Created: {{.CreatedSince}} | Size: {{.Size}}"
 
