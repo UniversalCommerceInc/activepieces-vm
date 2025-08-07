@@ -66,7 +66,7 @@ export function generateTheme({
 export const defaultTheme = generateTheme({
     primaryColor: '#6e41e2',
     websiteName: 'UNIVERSAL COMMERCE',
-    fullLogoUrl: 'https://universalcommerce.com/hs-fs/hubfs/UC%20Logo.jpg?width=3360&height=1872&name=UC%20Logo.jpg',
-    favIconUrl: 'https://universalcommerce.com/hs-fs/hubfs/UC%20Logo.jpg?width=3360&height=1872&name=UC%20Logo.jpg',
-    logoIconUrl: 'https://universalcommerce.com/hs-fs/hubfs/UC%20Logo.jpg?width=3360&height=1872&name=UC%20Logo.jpg',
+    fullLogoUrl: 'https://marketplace.commercetools.com/img/containers/assets/integrations/universalcommerce/stage-logo-universal_commerce.png/6974a4a604871e80c96a19ac79fe9e99.png',
+    favIconUrl: 'https://marketplace.commercetools.com/img/containers/assets/integrations/universalcommerce/stage-logo-universal_commerce.png/6974a4a604871e80c96a19ac79fe9e99.png',
+    logoIconUrl: 'https://marketplace.commercetools.com/img/containers/assets/integrations/universalcommerce/stage-logo-universal_commerce.png/6974a4a604871e80c96a19ac79fe9e99.png',
 })
