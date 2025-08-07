@@ -66,7 +66,7 @@ export function generateTheme({
 export const defaultTheme = generateTheme({
     primaryColor: '#6e41e2',
     websiteName: 'Activepieces',
-    fullLogoUrl: 'https://cdn.activepieces.com/brand/full-logo.png',
-    favIconUrl: 'https://cdn.activepieces.com/brand/favicon.ico',
-    logoIconUrl: 'https://cdn.activepieces.com/brand/logo.svg',
+    fullLogoUrl: 'https://universalcommerce.com/hs-fs/hubfs/UC%20Logo.jpg?width=3360&height=1872&name=UC%20Logo.jpg',
+    favIconUrl: 'https://universalcommerce.com/hs-fs/hubfs/UC%20Logo.jpg?width=3360&height=1872&name=UC%20Logo.jpg',
+    logoIconUrl: 'https://universalcommerce.com/hs-fs/hubfs/UC%20Logo.jpg?width=3360&height=1872&name=UC%20Logo.jpg',
 })
