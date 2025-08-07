@@ -65,7 +65,7 @@ export function generateTheme({
 
 export const defaultTheme = generateTheme({
     primaryColor: '#6e41e2',
-    websiteName: 'Activepieces',
+    websiteName: 'UNIVERSAL COMMERCE',
     fullLogoUrl: 'https://universalcommerce.com/hs-fs/hubfs/UC%20Logo.jpg?width=3360&height=1872&name=UC%20Logo.jpg',
     favIconUrl: 'https://universalcommerce.com/hs-fs/hubfs/UC%20Logo.jpg?width=3360&height=1872&name=UC%20Logo.jpg',
     logoIconUrl: 'https://universalcommerce.com/hs-fs/hubfs/UC%20Logo.jpg?width=3360&height=1872&name=UC%20Logo.jpg',
