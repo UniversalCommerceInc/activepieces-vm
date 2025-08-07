@@ -65,8 +65,8 @@ export function generateTheme({
 
 export const defaultTheme = generateTheme({
     primaryColor: '#6e41e2',
-    websiteName: 'Activepieces',
-    fullLogoUrl: 'https://cdn.activepieces.com/brand/full-logo.png',
-    favIconUrl: 'https://cdn.activepieces.com/brand/favicon.ico',
-    logoIconUrl: 'https://cdn.activepieces.com/brand/logo.svg',
+    websiteName: 'UNIVERSAL COMMERCE',
+    fullLogoUrl: 'https://marketplace.commercetools.com/img/containers/assets/integrations/universalcommerce/stage-logo-universal_commerce.png/6974a4a604871e80c96a19ac79fe9e99.png',
+    favIconUrl: 'https://marketplace.commercetools.com/img/containers/assets/integrations/universalcommerce/stage-logo-universal_commerce.png/6974a4a604871e80c96a19ac79fe9e99.png',
+    logoIconUrl: 'https://marketplace.commercetools.com/img/containers/assets/integrations/universalcommerce/stage-logo-universal_commerce.png/6974a4a604871e80c96a19ac79fe9e99.png',
 })
