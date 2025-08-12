@@ -1,4 +1,4 @@
-import { Level, Logger, pino, TransportTargetOptions } from 'pino'
+import pino, { Level, Logger,  TransportTargetOptions } from 'pino'
 import 'pino-loki'
 
 export type LokiCredentials = {        

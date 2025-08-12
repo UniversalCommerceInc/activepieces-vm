@@ -1,5 +1,5 @@
 import * as HyperDX from '@hyperdx/node-opentelemetry'
-import { Level, Logger, pino, TransportTargetOptions } from 'pino'
+import pino, { Level, Logger,  TransportTargetOptions } from 'pino'
 
 export type HyperDXCredentials = {
     token: string | undefined
