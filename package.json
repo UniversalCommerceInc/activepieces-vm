@@ -452,14 +452,14 @@
     "includedScripts": []
   },
   "resolutions": {
-    "rollup": "npm:@rollup/wasm-node"
+    "rollup": "4.21.2"
   },
   "overrides": {
     "@tryfabric/martian": {
       "@notionhq/client": "$@notionhq/client"
     },
     "vite": {
-      "rollup": "npm:@rollup/wasm-node"
+      "rollup": "4.21.2"
     }
   }
 }

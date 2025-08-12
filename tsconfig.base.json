@@ -970,6 +970,9 @@
       "@activepieces/piece-vbout": [
         "packages/pieces/community/vbout/src/index.ts"
       ],
+      "@activepieces/piece-vendure": [
+        "packages/pieces/community/vendure/src/index.ts"
+      ],
       "@activepieces/piece-village": [
         "packages/pieces/community/village/src/index.ts"
       ],
